@@ -5,18 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="index.js" defer type="module"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header><h1>Speed-Pinyin</h1><div><span>Characters per minute:</span><span id="cpm"></span></div></header>
+    <header><h1>Speed-Pinyin</h1><div><span>Characters per minute: </span><span id="cpm"></span></div></header>
 
     <main>
-        <div id="characters"></div>
-        <div id="buttons"></div>
-        <div id="text">
-            <input type="button" value="Analyze" id="analyze">
-            <input type="text" id="character_input">
-            <input type="text" id="pinyin_input">
-            <div id="output"></div>
+        <div id="output" class="output"></div>
+        <div id="characters" class="output"></div>
+        <div id="buttons" class="centered"></div>
+        
+        <div id="text" class="textInput">
+            <input type="button" value="Analyze" id="analyze" class="button static">
+            <div class="row height">
+                <input type="text" id="character_input" class="input">
+                <input type="text" id="pinyin_input" class="input">
+            </div>
+        </div>
+        <div id="finalText">
+
         </div>
     </main>
 

@@ -7,21 +7,30 @@ const map = {};
 function updateEntry(entry, type){
     const character = entry[type];
     const pinyin = entry.pinyin;
+    const definition = entry.definitions.toString().replaceAll(",", ", ");
+    console.log(definition);
     if (map[character] !== undefined) {
         if (!map[character].pinyin.includes(pinyin)){
             map[character].pinyin += " " + pinyin;
-            map[character].definitions[pinyin] = entry.definitions;
+            map[character].definitions[pinyin] = definition;
             if (character === "为") {
                 console.log(map[character].definitions);
                 console.log(entry.definitions);
             }
             map[character].duoyin = true;
         }
+        else if (map[character].definitions[pinyin] !== undefined){
+            
+            if (!(map[character].definitions[pinyin].includes(definition))) {
+                map[character].definitions[pinyin] += "\n\n" + definition;
+            }
+            
+        }
     } else {
         map[character] = {};
         Object.assign(map[character], entry);
         const definitions = {};
-        definitions[pinyin] = entry.definitions;
+        definitions[pinyin] = entry.definitions.toString().replaceAll(",", ", ");
         map[character].definitions = definitions;
 
         map[character].duoyin = false;
@@ -53,6 +62,8 @@ function number2ToneMark(car) {
     car = car.replace("u5", "u");
     car = car.replace("ü5", "ü");
 
+    car = car.replace("u:5", "ü");
+
     car = car.replace("a1", "ā");
     car = car.replace("a2", "á");
     car = car.replace("a3", "ǎ");
@@ -77,6 +88,12 @@ function number2ToneMark(car) {
     car = car.replace("ü2", "ǘ");
     car = car.replace("ü3", "ǚ");
     car = car.replace("ü4", "ǜ");
+
+    car = car.replace("u:1", "ǖ");
+    car = car.replace("u:2", "ǘ");
+    car = car.replace("u:3", "ǚ");
+    car = car.replace("u:4", "ǜ");
+
     car = car.replace("an1", "ān");
     car = car.replace("an2", "án");
     car = car.replace("an3", "ǎn");
